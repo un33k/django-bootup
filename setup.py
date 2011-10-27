@@ -5,7 +5,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name='django-bootup',
-    version='0.4',
+    version='0.5',
     description = "A handy utility app that helps bootup django quick and secure",
     long_description = read('README'),
     author='Val L33',

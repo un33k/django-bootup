@@ -72,6 +72,8 @@ Also: Any existing user at pk=1 will be updated to superuser
 ToDo
 =====
 clean up readme
+add auto UserProfile deletion when a User is deleted
+Add test case for UserProfile Creation
 add more goodies
 
 
