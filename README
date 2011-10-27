@@ -1,0 +1,72 @@
+django-bootup
+================
+
+A custom Django Bootup helps with repetitive tasks of running a clean project.
+
+Current features:
+1. Disables syncdb prompting the creation of a superuser
+2. Latches on the post_syncdb signal and once syncdb is complete, it starts bootstrapping the site
+3. It loads up any fixtures at a specified directory in your setting.py
+    a. any valid fixture file will be loaded, with or without the initial_ prefix
+    b. fixture directory is different than that of Django and set by: INITIAL_FIXTURES_DIRS
+4. It creates a superuser with pk=1
+    a. user credentials defined in private or local settings.py
+5. It creates four sites, production, integration, localhost and a local_ip 
+    a. site credentials defined in private or local settings.py
+
+Patches welcome: http://bitbucket.org/un33k/django-bootup
+
+Usage
+=====
+
+If you want a worry free django bootup process, then this is for you.
+
+Here what you need to do:
+        
+1. Stick ``"bootup"`` in ``INSTALLED_APPS``. After all other Django specific Apps
+2. Create the following in your local_settings.py or private_settings.py or settings.py.
+
+# superuser credentials
+ADMIN_NAME = "your superuser name"
+MAIN_PASS = "your superuser password?"
+ADMIN_EMAIL = "your superuser email address"
+
+# few sites you might need
+SITE_INFO = {
+    '1': {
+        'name': 'production',
+        'domain': "example.com"
+    },
+    '2':{
+        'name': 'integration', # (optional)
+        'domain': "example.net"
+    },
+    '3': {
+        'name': 'localhost', # development on local system (optional)
+        'domain': 'localhost:8080'
+    },
+    '4':{
+        'name': 'internal', # development on local or remote system (headless vmware!) (optional)
+        'domain': '192.168.224.128:8080'
+    }   
+}
+
+# all valid fixture files in this directory will be loaded up regardless of whether they start with
+# initial_ or not
+INITIAL_FIXTURES_DIRS = "/some/real/path/to/your/fixtures"
+            
+That's it.
+Run syncdb on an empty database and enjoy
+
+Note: No action is taken on any of the above definitions unless they are found in settings.py
+Also: Any existing user at pk=1 will be updated to superuser
+      Any existing sites might be updated depending of pk of the site object
+
+ToDo
+=====
+clean up readme
+add more goodies
+
+
+
+
