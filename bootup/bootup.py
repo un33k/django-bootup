@@ -7,7 +7,7 @@ from .sites import setup_sites
 # bootstrap the site with all info but only after the completion of syncdb
 def bootup(sender, **kwargs):
     """
-    After syncdb, bootstarp makes required adjustements in order to prepare and  to secure the site
+    After syncdb, bootup makes the required adjustements in order to prepare and secure the site
     """
     # only trigger if we have installed the last app
     # print kwargs['app'].__name__ + " -- " + settings.INSTALLED_APPS[-1]+".models"

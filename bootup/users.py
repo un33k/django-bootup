@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 def setup_superuser(username, password, email):
     """
-    Update or Create a supersuer account (fist user of this site)
+    Create or update and account of type supersuer (fist user of this site)
     """
     if username and password and email:
         user, created = User.objects.get_or_create(pk=1)

@@ -3,9 +3,8 @@ from .utils import fetch_model
 
 def get_profile_model():
     """
-    Return the model class for the currently-active user profile
-    model, as defined by the ``AUTH_PROFILE_MODULE`` setting. If that
-    setting is missing, return None
+    Return the model class for the user profile, as defined by the 
+    ``AUTH_PROFILE_MODULE`` setting. Or None
     """
     profile_module = getattr(settings, 'AUTH_PROFILE_MODULE', '')
     if profile_module:
