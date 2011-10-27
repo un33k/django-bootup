@@ -13,6 +13,7 @@ Current features:
     a. user credentials defined in private or local settings.py
 5. It creates four sites, production, integration, localhost and a local_ip 
     a. site credentials defined in private or local settings.py
+6. Auto create a user profile after each user creation
 
 Patches welcome: http://bitbucket.org/un33k/django-bootup
 
@@ -54,7 +55,13 @@ SITE_INFO = {
 # all valid fixture files in this directory will be loaded up regardless of whether they start with
 # initial_ or not
 INITIAL_FIXTURES_DIRS = "/some/real/path/to/your/fixtures"
-            
+
+If the following are set and a valid profile.UserProfile class in set:
+AUTH_PROFILE_MODULE = True:
+USER_PROFILE_AUTO_CREATE = 'profiles.Userprofile'
+Then bootup will try to create the a profile for each user creation.
+If the above are not set, or on errors, it will quietly skip creation of UserProfile.
+
 That's it.
 Run syncdb on an empty database and enjoy
 

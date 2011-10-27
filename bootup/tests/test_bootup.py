@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.template import Context, Template
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-
+from bootup.profiles import get_profile_model
 
 class BootupSuperuserTestCase(TestCase):
     """Tests for Django Bootup - Default Superuser """
@@ -21,6 +21,8 @@ class BootupSuperuserTestCase(TestCase):
         self.assertEquals(admin.is_active, True)
         self.assertEquals(admin.is_superuser, True)
         self.assertEquals(admin.is_staff, True)
+        print "\n-> " + self.__doc__ + " (Done!)"
+
 
 class BootupSiteTestCase(TestCase):
     """Tests for Django Bootup - Default Sites"""
@@ -36,3 +38,12 @@ class BootupSiteTestCase(TestCase):
         
         site = Site.objects.get(name="integration")
         self.assertEquals(site.domain, "example.net")
+        print "\n-> " + self.__doc__ + " (Done!)"
+
+
+class BootupUserProfileTestCase(TestCase):
+    """Tests for Django Bootup - User Profile"""
+    
+    def test_manager(self):
+        pass
+
