@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'bootup',
 ]
 
-# django-profiles ?
-AUTH_PROFILE_MODULE = 'profiles.UserProfile'
+# django profiles
+AUTH_PROFILE_MODULE = 'bootup.UserProfile'
+USER_PROFILE_AUTO_CREATE = True
+
 
 

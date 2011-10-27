@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.template import Context, Template
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from bootup.profiles import get_profile_model
+from bootup.models import UserProfile
 
 class BootupSuperuserTestCase(TestCase):
     """Tests for Django Bootup - Default Superuser """
@@ -45,5 +45,13 @@ class BootupUserProfileTestCase(TestCase):
     """Tests for Django Bootup - User Profile"""
     
     def test_manager(self):
-        pass
+        user, created = User.objects.get_or_create(username="john")
+        self.assertEquals(user.username, "john")
+        profile = UserProfile.objects.get(user=user)
+        self.assertEquals(profile.user, user)
+        print "\n-> " + self.__doc__ + " (Done!)"
+
+
+
+
 
