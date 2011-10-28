@@ -66,7 +66,17 @@ _________________
         * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
         * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
 
-5. More to come ... patches & enhancements are welcomed (http://bitbucket.org/un33k/django-bootup)
+5. Automatically delete a matching user profile ``anytime`` after each user deletion if:
+    A. Existence of USER_PROFILE_AUTO_CREATE = True in your settings file
+    B. Existence of USER_PROFILE_AUTO_DELETE = True in your settings file
+    C. Existence of AUTH_PROFILE_MODULE = 'application.UserProfile' in your settings file
+        * _ Example ``AUTH_PROFILE_MODULE = profile.UserProfile'``
+    D. User profile deletion will be skipped if:
+        * _ USER_PROFILE_AUTO_DELETE is set to False or empty or not set in your settings file
+        * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
+        * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
+
+6. More to come ... patches & enhancements are welcomed (http://bitbucket.org/un33k/django-bootup)
 
 Usage
 =====
@@ -90,7 +100,6 @@ A. Install django-bootup:
 ToDo
 =====
 clean up README
-add auto UserProfile deletion when a User is deleted
 add more goodies
 
 

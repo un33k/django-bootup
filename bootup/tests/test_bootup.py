@@ -21,8 +21,9 @@ class BootupSuperuserTestCase(TestCase):
         self.assertEquals(admin.is_active, True)
         self.assertEquals(admin.is_superuser, True)
         self.assertEquals(admin.is_staff, True)
-        print "\n-> " + self.__doc__ + " (Done!)"
-
+        
+        # clean up
+        User.objects.all().delete()
 
 class BootupSiteTestCase(TestCase):
     """Tests for Django Bootup - Default Sites"""
@@ -38,18 +39,60 @@ class BootupSiteTestCase(TestCase):
         
         site = Site.objects.get(name="integration")
         self.assertEquals(site.domain, "example.net")
-        print "\n-> " + self.__doc__ + " (Done!)"
+        
+        # clean up
+        Site.objects.all().delete()
 
-
-class BootupUserProfileTestCase(TestCase):
-    """Tests for Django Bootup - User Profile"""
+if getattr(settings, 'USER_PROFILE_AUTO_CREATE', False):
+    class BootupUserProfileCreateTestCase(TestCase):
+        """Tests for Django Bootup - User Profile Create"""
     
-    def test_manager(self):
-        user, created = User.objects.get_or_create(username="john")
-        self.assertEquals(user.username, "john")
-        profile = UserProfile.objects.get(user=user)
-        self.assertEquals(profile.user, user)
-        print "\n-> " + self.__doc__ + " (Done!)"
+        def test_manager(self):
+            # create a userprofile when a user is created
+            username = "john"
+            user, created = User.objects.get_or_create(username=username)
+            self.assertEquals(user.username, username)
+        
+            # related profile has to exist
+            profile = UserProfile.objects.get(user=user)
+            self.assertEquals(profile.user, user)
+        
+            # clean up
+            User.objects.all().delete()
+        
+            # clean up as the auto delete flag may not be set
+            UserProfile.objects.all().delete()
+
+
+        
+if getattr(settings, 'USER_PROFILE_AUTO_DELETE', False) and \
+    getattr(settings, 'USER_PROFILE_AUTO_CREATE', False):
+    class BootupUserProfileDeleteTestCase(TestCase):
+        """Tests for Django Bootup - User Profile Delete"""
+    
+        def test_manager(self):
+            # create a userprofile when a user is created
+            username = "john"
+            user, created = User.objects.get_or_create(username=username)
+        
+            # related profile has to exist
+            profile = UserProfile.objects.get(user=user)
+            self.assertEquals(profile.user, user)
+        
+            username1 = "john1"
+            user1, created = User.objects.get_or_create(username=username1)
+        
+            # related profile has to exist
+            profile1 = UserProfile.objects.get(user=user1)
+            self.assertEquals(profile1.user, user1)
+        
+            # delete the user1
+            User.objects.all().delete()
+        
+            # related profile must have been delete as well
+            profiles = UserProfile.objects.all()
+            self.assertEquals(len(profiles), 0)
+
 
 
 

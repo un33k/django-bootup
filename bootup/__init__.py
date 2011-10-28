@@ -10,7 +10,7 @@ from django.db.models import signals
 from django.contrib.auth.management import create_superuser
 from django.contrib.auth import models as auth_app
 from django.contrib.auth.models import User
-from .profiles import create_profile
+from .profiles import create_profile, delete_profile
 from .bootup import bootup
 
 # disable syncdb from prompting you to create a superuser.
@@ -25,7 +25,12 @@ signals.post_syncdb.connect(bootup)
 
 # when a user is created and saved to db, a profile for that user is created
 if getattr(settings, 'AUTH_PROFILE_MODULE', False):
+    # latch on user creation if flag is set
     if getattr(settings, 'USER_PROFILE_AUTO_CREATE', False):
         signals.post_save.connect(create_profile, sender=User)
+
+        # latch on user deletion if flag if both (create & delete) flags are set
+        if getattr(settings, 'USER_PROFILE_AUTO_DELETE', False):
+            signals.post_delete.connect(delete_profile, sender=User)
 
 
