@@ -21,9 +21,9 @@ def bootup(sender, **kwargs):
 
         # 3. setup an admin account
         setup_superuser(
-            username=getattr(settings, 'ADMIN_NAME', ''),
-            password=getattr(settings, 'MAIN_PASS', ''),
-            email=getattr(settings, 'ADMIN_EMAIL', '')
+            username=getattr(settings, 'BOOTUP_SUPERUSER_NAME', ''),
+            password=getattr(settings, 'BOOTUP_SUPERUSER_PASSWORD', ''),
+            email=getattr(settings, 'BOOTUP_SUPERUSER_EMAIL', '')
          )
 
 

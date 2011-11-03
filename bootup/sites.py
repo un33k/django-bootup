@@ -7,7 +7,7 @@ def setup_sites():
     """
     Setup sites (name, domain) available for this project (SITE_ID will decide the active site)
     """
-    site_info = getattr(settings, 'SITE_INFO', None)
+    site_info = getattr(settings, 'BOOTUP_SITES', None)
     if site_info:
         ids = site_info.keys()
         ids.sort()

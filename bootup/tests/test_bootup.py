@@ -16,7 +16,7 @@ class BootupSuperuserTestCase(TestCase):
         self.assertEquals(len(users), 1)
         
         # username from testsettings
-        username=getattr(settings, 'ADMIN_NAME', ''),
+        username=getattr(settings, 'BOOTUP_SUPERUSER_NAME', ''),
         admin = User.objects.get(pk=1)
         self.assertEquals(admin.is_active, True)
         self.assertEquals(admin.is_superuser, True)
@@ -43,7 +43,7 @@ class BootupSiteTestCase(TestCase):
         # clean up
         Site.objects.all().delete()
 
-if getattr(settings, 'USER_PROFILE_AUTO_CREATE', False):
+if getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_CREATE', False):
     class BootupUserProfileCreateTestCase(TestCase):
         """Tests for Django Bootup - User Profile Create"""
     
@@ -65,8 +65,8 @@ if getattr(settings, 'USER_PROFILE_AUTO_CREATE', False):
 
 
         
-if getattr(settings, 'USER_PROFILE_AUTO_DELETE', False) and \
-    getattr(settings, 'USER_PROFILE_AUTO_CREATE', False):
+if getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_DELETE', False) and \
+    getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_CREATE', False):
     class BootupUserProfileDeleteTestCase(TestCase):
         """Tests for Django Bootup - User Profile Delete"""
     

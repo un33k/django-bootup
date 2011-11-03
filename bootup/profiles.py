@@ -16,7 +16,7 @@ def get_profile_model():
 def create_profile(sender, instance, created, **kwargs):
     """
     Create a matching profile whenever a user object is created.
-    if settings.USER_PROFILE_AUTO_CREATE is not defined or False, 
+    if settings.BOOTUP_USER_PROFILE_AUTO_CREATE is not defined or False, 
     the auto profile creation is skipped
     """
     profile_model = get_profile_model()
@@ -30,7 +30,7 @@ def create_profile(sender, instance, created, **kwargs):
 def delete_profile(sender, instance, **kwargs):
     """
     Delete a matching profile whenever a user object is deleted.
-    if settings.USER_PROFILE_AUTO_DELETE is not defined or False, 
+    if settings.BOOTUP_USER_PROFILE_AUTO_DELETE is not defined or False, 
     the auto profile creation is skipped
     """
     profile_model = get_profile_model()
