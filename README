@@ -11,11 +11,12 @@ _________________
 
 2. Latch on the ``post_syncdb`` signal and execute the following:
     A. Install all ``fixture(s)`` found within a given path (single path)
-        * - Path is set in your settings file as: INITIAL_FIXTURES_DIRS
+        * - Path is set in your settings file as: BOOTUP_INITIAL_FIXTURES_DIRS
         * _ Any valid fixture file(s) at the above path will be installed
         * _ Fixture files(s) at the above path don't require to start with ``initial_``
         * _ Fixture installation will be skipped if no fixture file is found at the specified path
-        * _ Fixture installation will be skipped if INITIAL_FIXTURES_DIRS is not defined or empty
+        * _ Fixture installation will be skipped if BOOTUP_INITIAL_FIXTURES_DIRS is not defined or empty
+        * _ Warning: fixture(s) in this directory will be loaded after ``each`` syncdb and wipe your changes out
 
     B. Create or Update a superuser
         * - This superuser will be the first created user on your system
