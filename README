@@ -33,7 +33,7 @@ _________________
         # -------------------------------
         BOOTUP_SITES = {
             '1': {
-                'name': 'production',
+                'name': 'Example Inc',  # production site
                 'domain': 'example.com'
             },
             '2':{
@@ -77,7 +77,7 @@ _________________
         * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
         * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
 
-6. More to come ... patches & enhancements are welcomed (http://bitbucket.org/un33k/django-bootup)
+6. More to come ... patches & enhancements are welcomed (http://github.com/un33k/django-bootup)
 
 Usage
 =====
@@ -86,7 +86,7 @@ A. Install django-bootup:
     * _ Make sure you have python 2.6+ and can install from pypi
         1. easy_install django-bootup
         2. pip install django-bootup
-        3. git clone http://bitbucket.org/un33k/django-bootup
+        3. git clone http://github.com/un33k/django-bootup
             a. cd django-bootup
             b. run python setup.py
         4. wget https://github.com/un33k/django-bootup/zipball/master
