@@ -35,82 +35,82 @@ How to use
 Running the tests
 =================
 
-To run the tests against the current environment:
+    To run the tests against the current environment:
 
     python manage.py test bootup
 
 
 Current Features
 =================
-1. Disable ``syncdb`` from prompting you to create a superuser
+    1. Disable ``syncdb`` from prompting you to create a superuser
 
-2. Latch on the ``post_syncdb`` signal and execute the following:
-    A. Install all ``fixture(s)`` found within a given path (single path)
-        * - Path is set in your settings file as: BOOTUP_INITIAL_FIXTURES_DIRS
-        * _ Any valid fixture file(s) at the above path will be installed
-        * _ Fixture files(s) at the above path don't require to start with ``initial_``
-        * _ Fixture installation will be skipped if no fixture file is found at the specified path
-        * _ Fixture installation will be skipped if BOOTUP_INITIAL_FIXTURES_DIRS is not defined or empty
-        * _ Warning: fixture(s) in this directory will be loaded after ``each`` syncdb and wipe your changes out
+    2. Latch on the ``post_syncdb`` signal and execute the following:
+        A. Install all ``fixture(s)`` found within a given path (single path)
+            * - Path is set in your settings file as: BOOTUP_INITIAL_FIXTURES_DIRS
+            * _ Any valid fixture file(s) at the above path will be installed
+            * _ Fixture files(s) at the above path don't require to start with ``initial_``
+            * _ Fixture installation will be skipped if no fixture file is found at the specified path
+            * _ Fixture installation will be skipped if BOOTUP_INITIAL_FIXTURES_DIRS is not defined or empty
+            * _ Warning: fixture(s) in this directory will be loaded after ``each`` syncdb and wipe your changes out
 
-    B. Create or Update a superuser
-        * - This superuser will be the first created user on your system
-        * - Primary Key = ``1`` will be used to fetch and update existing superuser
-        * - Superuser credentials have to be set in the project's settings file as follows:
-          + BOOTUP_SUPERUSER_NAME = "desired name for the superuser"
-          + BOOTUP_SUPERUSER_PASSWORD = "desired password for ``the`` superuser"
-          + BOOTUP_SUPERUSER_EMAIL = "desired email address for the superuser"
-        * _ Superuser creation/update will be skipped if:
-          + Any of the three (above) credentials is undefined or empty
+        B. Create or Update a superuser
+            * - This superuser will be the first created user on your system
+            * - Primary Key = ``1`` will be used to fetch and update existing superuser
+            * - Superuser credentials have to be set in the project's settings file as follows:
+              + BOOTUP_SUPERUSER_NAME = "desired name for the superuser"
+              + BOOTUP_SUPERUSER_PASSWORD = "desired password for ``the`` superuser"
+              + BOOTUP_SUPERUSER_EMAIL = "desired email address for the superuser"
+            * _ Superuser creation/update will be skipped if:
+              + Any of the three (above) credentials is undefined or empty
 
-    C. Automatically create the required ``Site`` objects with proper ``name`` and ``domain`` if:
-        * _ Existence of BOOTUP_SITES in your setting file with the following format
-        # -------------------------------
-        BOOTUP_SITES = {
-            '1': {
-                'name': 'Example Inc',  # production site
-                'domain': 'example.com'
-            },
-            '2':{
-                'name': 'integration', # (optional)
-                'domain': 'example.net'
-            },
-            '3': {
-                'name': 'localhost', # development on local system (optional)
-                'domain': 'localhost:8080'
-            },
-            '4':{
-                'name': 'internal', # development on local or remote system such as headless vm!  (optional)
-                'domain': '10.10.1.50:8080'
-            }   
-        }
-        # -------------------------------
-        * _ SITE_ID needs to be set to an index to one of the above fields in BOOTUP_SITES
-            + For the Production server set SITE_ID = "1"
-            + For the Integration server set SITE_ID = "2"
-            + For the Localhost server set SITE_ID = "3"
-            + For a IP based server set SITE_ID = "4"
-        * _ Any existing site objects with (pk= 1,2,3,4) will be updated with the relevant info set in BOOTUP_SITES
-        * _ Site creation will be skipped if BOOTUP_SITES is not defined in your settings file
+        C. Automatically create the required ``Site`` objects with proper ``name`` and ``domain`` if:
+            * _ Existence of BOOTUP_SITES in your setting file with the following format
+            # -------------------------------
+            BOOTUP_SITES = {
+                '1': {
+                    'name': 'Example Inc',  # production site
+                    'domain': 'example.com'
+                },
+                '2':{
+                    'name': 'integration', # (optional)
+                    'domain': 'example.net'
+                },
+                '3': {
+                    'name': 'localhost', # development on local system (optional)
+                    'domain': 'localhost:8080'
+                },
+                '4':{
+                    'name': 'internal', # development on local or remote system such as headless vm!  (optional)
+                    'domain': '10.10.1.50:8080'
+                }   
+            }
+            # -------------------------------
+            * _ SITE_ID needs to be set to an index to one of the above fields in BOOTUP_SITES
+                + For the Production server set SITE_ID = "1"
+                + For the Integration server set SITE_ID = "2"
+                + For the Localhost server set SITE_ID = "3"
+                + For a IP based server set SITE_ID = "4"
+            * _ Any existing site objects with (pk= 1,2,3,4) will be updated with the relevant info set in BOOTUP_SITES
+            * _ Site creation will be skipped if BOOTUP_SITES is not defined in your settings file
 
-4. Automatically create a matching user profile ``anytime`` after each user creation if:
-    A. Existence of BOOTUP_USER_PROFILE_AUTO_CREATE = True in your settings file
-    B. Existence of AUTH_PROFILE_MODULE = 'application.UserProfile' in your settings file
-        * _ Example ``AUTH_PROFILE_MODULE = profile.UserProfile'``
-    C. User profile creation will be skipped if:
-        * _ BOOTUP_USER_PROFILE_AUTO_CREATE is set to False or empty or not set in your settings file
-        * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
-        * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
+    4. Automatically create a matching user profile ``anytime`` after each user creation if:
+        A. Existence of BOOTUP_USER_PROFILE_AUTO_CREATE = True in your settings file
+        B. Existence of AUTH_PROFILE_MODULE = 'application.UserProfile' in your settings file
+            * _ Example ``AUTH_PROFILE_MODULE = profile.UserProfile'``
+        C. User profile creation will be skipped if:
+            * _ BOOTUP_USER_PROFILE_AUTO_CREATE is set to False or empty or not set in your settings file
+            * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
+            * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
 
-5. Automatically delete a matching user profile ``anytime`` after each user deletion if:
-    A. Existence of BOOTUP_USER_PROFILE_AUTO_CREATE = True in your settings file
-    B. Existence of BOOTUP_USER_PROFILE_AUTO_DELETE = True in your settings file
-    C. Existence of AUTH_PROFILE_MODULE = 'application.UserProfile' in your settings file
-        * _ Example ``AUTH_PROFILE_MODULE = profile.UserProfile'``
-    D. User profile deletion will be skipped if:
-        * _ BOOTUP_USER_PROFILE_AUTO_DELETE is set to False or empty or not set in your settings file
-        * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
-        * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
+    5. Automatically delete a matching user profile ``anytime`` after each user deletion if:
+        A. Existence of BOOTUP_USER_PROFILE_AUTO_CREATE = True in your settings file
+        B. Existence of BOOTUP_USER_PROFILE_AUTO_DELETE = True in your settings file
+        C. Existence of AUTH_PROFILE_MODULE = 'application.UserProfile' in your settings file
+            * _ Example ``AUTH_PROFILE_MODULE = profile.UserProfile'``
+        D. User profile deletion will be skipped if:
+            * _ BOOTUP_USER_PROFILE_AUTO_DELETE is set to False or empty or not set in your settings file
+            * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
+            * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
 
 
 Changelog
