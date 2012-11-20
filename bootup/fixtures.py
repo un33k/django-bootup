@@ -2,7 +2,7 @@ import os
 from django.conf import settings
 from django.core.management import call_command
 
-# lodd up fixtures right after the last installed app is loaded up
+# load up fixtures right after the last installed app is loaded up
 def load_fixtures():
     """
     Load initial fixtures located @ BOOTUP_INITIAL_FIXTURES_DIRS defined in settings

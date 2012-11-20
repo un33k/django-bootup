@@ -1,4 +1,5 @@
 from django.db.models import get_model
+
 def fetch_model(name):
     """
     Return the model class for ``name`` in the following format:

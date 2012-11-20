@@ -1,12 +1,47 @@
-django-bootup
-================
+Django Bootup Application
+====================
 
-A Django  application that helps with quick and secure bootup of your django project".
-``Bootup takes care of your repetitive tasks of running a clean project.``
+**A Django application that takes care of the repetitive tasks of starting and running a clean project.**
 
-Current Features:
-_________________
+**Author:** Val Neekman, [ info@neekware.com, @vneekman]
 
+Overview
+========
+
+Bootup can create your superuser automatically, setup your sites objects, create and delete your
+UserProfiles when a User is created or delete and even load up your initial fixtures in a deterministic way.
+
+How to install
+==================
+
+    1. easy_install django-bootup
+    2. pip install django-bootup
+    3. git clone http://github.com/un33k/django-bootup
+        a. cd django-bootup
+        b. run python setup.py
+    4. wget https://github.com/un33k/django-bootup/zipball/master
+        a. unzip the downloaded file
+        b. cd into django-bootup-* directory
+        c. run python setup.py
+
+How to use
+=================
+
+    Stick ``"bootup"`` in ``INSTALLED_APPS``, right after all other Django specific Apps
+    Follow the instruction in the ``Current Features`` at the top of this file for usage.
+    Run syncdb and enjoy
+
+
+Running the tests
+=================
+
+To run the tests against the current environment:
+
+    python manage.py test bootup
+
+
+Current Features
+=================
 1. Disable ``syncdb`` from prompting you to create a superuser
 
 2. Latch on the ``post_syncdb`` signal and execute the following:
@@ -77,32 +112,48 @@ _________________
         * _ AUTH_PROFILE_MODULE is empty, invalid or not set in your setting file
         * _ AUTH_PROFILE_MODULE points to an application and module that is incomplete or misconfigured
 
-6. More to come ... patches & enhancements are welcomed (http://github.com/un33k/django-bootup)
 
-Usage
-=====
+Changelog
+=========
 
-A. Install django-bootup:
-    * _ Make sure you have python 2.6+ and can install from pypi
-        1. easy_install django-bootup
-        2. pip install django-bootup
-        3. git clone http://github.com/un33k/django-bootup
-            a. cd django-bootup
-            b. run python setup.py
-        4. wget https://github.com/un33k/django-bootup/zipball/master
-            a. unzip the downloaded file
-            b. cd into django-bootup-* directory
-            c. run python setup.py
+1.0.1
+-----
+* move away from buildout
+* add .travis.yml
+* changed version format
 
-    * _ Stick ``"bootup"`` in ``INSTALLED_APPS``, right after all other Django specific Apps
-    * _ Follow the instruction in the ``Current Features`` at the top of this file for usage.
-    * _ Run syncdb and enjoy
+0.1
+-----
+* initial release
+* disable syncdb prompt to generate superuser
+* auto generate superuser post syncdb
+* auto generate site(s) object
 
-ToDo
-=====
-clean up README
-add more goodies
+License
+=======
 
+Copyright © Val Neekman
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this 
+list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this 
+list of conditions and the following disclaimer in the documentation and/or 
+other materials provided with the distribution.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE 
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 

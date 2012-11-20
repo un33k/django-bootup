@@ -1,5 +1,5 @@
 from django.conf import settings
-from .utils import fetch_model
+from util import fetch_model
 
 def get_profile_model():
     """
@@ -12,6 +12,7 @@ def get_profile_model():
         if profile_model:
             return profile_model
     return None
+
 
 def create_profile(sender, instance, created, **kwargs):
     """
@@ -26,6 +27,7 @@ def create_profile(sender, instance, created, **kwargs):
                 p, c = profile_model.objects.get_or_create(user=instance)
             except:
                 pass
+
 
 def delete_profile(sender, instance, **kwargs):
     """

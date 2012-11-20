@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
-"""Unit tests for django bootup"""
+
 from django.conf import settings
 from django.test import TestCase
 from django.template import Context, Template
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from bootup.models import UserProfile
+from models import UserProfile
 
 class BootupSuperuserTestCase(TestCase):
     """Tests for Django Bootup - Default Superuser """
     
     def test_manager(self):
-        # we should have one user
-        users = User.objects.all()
-        self.assertEquals(len(users), 1)
-        
+
         # username from testsettings
-        username=getattr(settings, 'BOOTUP_SUPERUSER_NAME', ''),
-        admin = User.objects.get(pk=1)
-        self.assertEquals(admin.is_active, True)
-        self.assertEquals(admin.is_superuser, True)
-        self.assertEquals(admin.is_staff, True)
+        username=getattr(settings, 'BOOTUP_SUPERUSER_NAME')
+        email=getattr(settings, 'BOOTUP_SUPERUSER_EMAIL')
+        superuser = User.objects.get(email=email)
+        self.assertEquals(superuser.username, username)
+        self.assertEquals(superuser.is_active, True)
+        self.assertEquals(superuser.is_superuser, True)
+        self.assertEquals(superuser.is_staff, True)
         
         # clean up
         User.objects.all().delete()
@@ -40,8 +39,13 @@ class BootupSiteTestCase(TestCase):
         site = Site.objects.get(name="integration")
         self.assertEquals(site.domain, "example.net")
         
+        # get the current site and it has to match the SITE_ID from the settings
+        site = Site.objects.get_current()
+        self.assertEquals(site.id, getattr(settings, 'SITE_ID'))
+
         # clean up
         Site.objects.all().delete()
+
 
 if getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_CREATE', False):
     class BootupUserProfileCreateTestCase(TestCase):
@@ -64,7 +68,6 @@ if getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_CREATE', False):
             UserProfile.objects.all().delete()
 
 
-        
 if getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_DELETE', False) and \
     getattr(settings, 'BOOTUP_USER_PROFILE_AUTO_CREATE', False):
     class BootupUserProfileDeleteTestCase(TestCase):
