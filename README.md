@@ -36,12 +36,12 @@ Running the tests
 =================
 
     To run the tests against the current environment:
-
     python manage.py test bootup
 
 
 Current Features
 =================
+
     1. Disable ``syncdb`` from prompting you to create a superuser
 
     2. Latch on the ``post_syncdb`` signal and execute the following:
