@@ -28,7 +28,7 @@ How to use
 =================
 
     Stick ``"bootup"`` in ``INSTALLED_APPS``, right after all other Django specific Apps
-    Follow the instruction in the ``Current Features`` at the top of this file for usage.
+    Follow the instructions in the ``Current Features`` section below for usage.
     Run syncdb and enjoy
 
 
