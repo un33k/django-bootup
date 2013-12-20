@@ -1,4 +1,4 @@
-Django Bootup Application
+Django Bootup Application  (Deprecated)
 ====================
 
 **A Django application that takes care of the repetitive tasks of starting and running a clean project.**
