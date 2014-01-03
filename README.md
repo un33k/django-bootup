@@ -1,14 +1,14 @@
 Django Bootup Application  (Deprecated)
 ====================
 
-Deprecated in favor of [django-finalware](https://github.com/un33k/django-finalware).
+**Deprecated** in favor of [django-finalware](https://github.com/un33k/django-finalware).
 
 
 
 ============
-**A Django application that takes care of the repetitive tasks of starting and running a clean project.**
 
-**Author:** Val Neekman, [ info@neekware.com, @vneekman]
+
+============
 
 Overview
 ========
